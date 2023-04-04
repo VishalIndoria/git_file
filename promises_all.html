@@ -1,0 +1,33 @@
+<script>
+    let post = [];
+    let lastActivityTime = "";
+    function updateLastUserActivityTime() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                lastActivityTime = new Date();
+                resolve()
+            }, 1000);
+        })
+    }
+    function createPost(newPost) {
+        return new Promise((resolve, reject) => {
+            post.push(newPost)
+            resolve("Post Created")
+        })
+    }
+    function deletePost() {
+        return new Promise((resolve, reject) => {
+            post.pop();
+            resolve("Post Deleted")
+        })
+    } createPost("post 1").then(updateLastUserActivityTime)
+        .then(() => {
+            console.log("Created Post", post)
+            console.log("Last Activity Time of User : ", lastActivityTime);
+        })
+        .then(deletePost).then(() => {
+            console.log("Deleted Post : ", post)
+
+        })
+
+</script>
