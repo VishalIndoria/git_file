@@ -1,0 +1,39 @@
+<script>
+    const preMovie = async () => {
+        const createUser = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("user1"), 2000);
+        });
+
+        var storedata = [{ title: 'POST1' }];
+        const getPopcorn = new Promise((resolve, reject) => resolve("popcorn"));
+        const getbuttor = new Promise((resolve, reject) => resolve("buttor"));
+        const getcoldDrink = new Promise((resolve, reject) => resolve("coldDrink"));
+
+        const getcreatUser = new Promise((resolve, reject) => {
+            storedata.push({ title: 'POST2' })
+            resolve()
+        });
+        const get2ndcreatUser = new Promise((resolve, reject) => {
+            storedata.push({ title: 'POST3' })
+            resolve()
+        });
+        const deletedata = new Promise((resolve, reject) => {
+            storedata.pop();
+            resolve()
+        });
+
+        let ticket = await createUser;
+
+        let [popcorn, buttor, coldDrink] = await Promise.all([
+            getPopcorn,
+            getbuttor,
+            getcoldDrink,
+        ]);
+
+        console.log(storedata);
+        console.log(`${popcorn}, ${buttor}, ${coldDrink}`);
+        return ticket;
+    };
+    preMovie()
+        .then((m) => console.log(`person : shows ${m}`));
+</script>
